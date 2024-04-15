@@ -4,8 +4,8 @@
 * Sršen knows that an analysis of Bellabeat’s available consumer data would reveal more opportunities for growth. She has asked the marketing analytics team to focus on a Bellabeat product and analyze smart device usage data in order to gain insight into how people are already using their smart devices. Then, using this information, she would like high-level recommendations for how these trends can inform Bellabeat marketing strategy.
 * The insights I discover will then help guide marketing strategy for the company. You will present your analysis to the Bellabeat executive team along with your high-level recommendations for Bellabeat’s marketing strategy.
 * Files available at:
-        * https://github.com/OwenGeeAndre/pROJECTS/blob/main/dailyActivity_merged.csv
-        * https://github.com/OwenGeeAndre/pROJECTS/blob/main/hourlyCalories_merged.csv
-        * https://github.com/OwenGeeAndre/pROJECTS/blob/main/hourlyIntensities_merged.csv
-        * https://github.com/OwenGeeAndre/pROJECTS/blob/main/hourlySteps_merged.csv
-        * https://github.com/OwenGeeAndre/pROJECTS/blob/main/sleepDay_merged.csv
+  * https://github.com/OwenGeeAndre/pROJECTS/blob/main/dailyActivity_merged.csv
+  * https://github.com/OwenGeeAndre/pROJECTS/blob/main/hourlyCalories_merged.csv
+  * https://github.com/OwenGeeAndre/pROJECTS/blob/main/hourlyIntensities_merged.csv
+  * https://github.com/OwenGeeAndre/pROJECTS/blob/main/hourlySteps_merged.csv
+  * https://github.com/OwenGeeAndre/pROJECTS/blob/main/sleepDay_merged.csv
