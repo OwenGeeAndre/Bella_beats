@@ -1,4 +1,5 @@
----------------------WHICH 10 USER COVERED MOST DISTANCES
+---------------------USERS WITH MOST DISTANCES COVERED
+----------------------------------------------------------------------------------------
 WITH Top10Users AS 
 (
 SELECT Id, AVG(TotalSteps) TOTALSTEPS, COUNT(Id) [Days_Used], ROUND(AVG(TrackerDistance), 2)  TRACKERDISTANCE, ROUND(AVG(VeryActiveDistance), 2) VERYACTIVEDISTANCE, 
@@ -11,14 +12,18 @@ SELECT totalsteps, days_used, trackerdistance, veryactivedistance, lightactivedi
 FROM Top10Users
 WHERE Usage_Rank <= 10
 
--------------------SUMMARY OF DISTANCE AND USAGE OF EACH USER--------------------
+
+------------------- DISTANCE AND USAGE SUMMARY OF EACH USER
+--------------------------------------------------------------------------------------
 SELECT Id, AVG(TotalSteps) TOTALSTEPS, COUNT(Id) [Days_Used], ROUND(AVG(TrackerDistance), 2)  TRACKERDISTANCE, ROUND(AVG(VeryActiveDistance), 2) VERYACTIVEDISTANCE, 
         ROUND(AVG(ModeratelyActiveDistance), 2) MODERATELYACTIVEDISTANCE, ROUND(AVG(LightActiveDistance), 2) LIGHTACTIVEDISTANCE, 
         ROUND(AVG(SedentaryActiveDistance), 2) SedentaryActiveDistance
 FROM dailyActivity_merged
 GROUP BY Id
 
----------------------USER ACTIVITY ON EVERY DAY OF THE WEEK
+
+---------------------USER ACTIVITY ON DAYS OF THE WEEK
+------------------------------------------------------------------------------------------
 SELECT Weekday, AVG(ACTIVEUSERS) [Average Active Users], SUM(ACTIVEUSERS) [Total Active Users],
 					SUM(INACTIVEUSERS) [Total Inactive Users]
 FROM
@@ -29,8 +34,9 @@ FROM dailyActivity_merged
 GROUP BY ActivityDate) AS subq1
 GROUP BY Weekday
 
---------------------AVERAGE STEPS STACTISTICS OF USERS THAT USED ON ALL RECORDED DAYS
 
+--------------------USAGE STATISTICS OF USERS THAT USED ON ALL RECORDED DAYS
+-----------------------------------------------------------------------------------------------------------
 SELECT Id, SUM(TOTALSTEPS) [Total Steps], AVG_TOTALSTEPS [Average Steps], 
 			COUNT(CASE WHEN TOTALSTEPS > AVG_TOTALSTEPS THEN 1 END) AS [Days Walked Above Average],
 			COUNT(CASE WHEN TOTALSTEPS < AVG_TOTALSTEPS THEN 1 END) AS [Days Walked Below Average],
@@ -45,8 +51,8 @@ GROUP BY Id, AVG_TOTALSTEPS
 HAVING  COUNT(ID) = 31
 
 
---------------------AVERAGE STEPS STACTISTICS OF USERS THAT DID NOT USE ON ALL RECORDED DAYS
-
+--------------------USAGE STATISTICS OF USERS THAT DID NOT USE ON ALL RECORDED DAYS
+-------------------------------------------------------------------------------------------------------------
 SELECT Id, SUM(TOTALSTEPS) [Total Steps], AVG_TOTALSTEPS [Average Steps], 
 			COUNT(CASE WHEN TOTALSTEPS > AVG_TOTALSTEPS THEN 1 END) AS [Days Walked Above Average],
 			COUNT(CASE WHEN TOTALSTEPS < AVG_TOTALSTEPS THEN 1 END) AS [Days Walked Below Average],  COUNT(Id) [Days Used],
@@ -60,7 +66,8 @@ FROM (
 GROUP BY Id, AVG_TOTALSTEPS
 HAVING  COUNT(Id) < 31
 
--------------------PEOPLE THAT USED FOR THE WHOLE MONTH VS THOSE THAT USED LESS
+-------------------COUNT OF USERS FOR CATEGORY OF DAYS USED
+------------------------------------------------------------------------------------
 SELECT
   COUNT(CASE WHEN amount = 31 THEN 1 END) AS Full_Month_Usage,
   COUNT(CASE WHEN amount <= 30 and amount > 25 THEN 1 END) AS [26-30 days],
@@ -75,7 +82,8 @@ FROM (
 
 
 
-----------------AVERAGE DISTANCE COVERED AND CALORIES BURNT ON DAYS OF THE WEEK
+----------------AVERAGE DISTANCE COVERED AND CALORIES BURNT ON DAYS OF THE WEEK FOR FULL AND PARTIAL USERS
+---------------------------------------------------------------------------------------------------------------------
 SELECT *
 INTO #FullUsers   ---creating temp table for average distance and calories burnt for full month users
 FROM(
@@ -99,6 +107,3 @@ SELECT #FullUsers.Day, #FullUsers.AvgTotalDistance [Average Distance Full], #Ful
 FROM #FullUsers
 INNER JOIN #PartUsers
 ON #FullUsers.Day = #PartUsers.Day
-
-SELECT *
-FROM dailyActivity_merged
